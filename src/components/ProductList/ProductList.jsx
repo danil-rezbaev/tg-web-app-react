@@ -16,9 +16,7 @@ const products = [
 ]
 
 const getTotalPrice = (items = []) => {
-    return items.reduce((acc, item) => {
-        return acc += item.price
-    }, 0)
+    return items.reduce((acc, item) => acc += item.price, 0)
 }
 
 const ProductList = () => {
@@ -31,7 +29,7 @@ const ProductList = () => {
             totalPrice: getTotalPrice(addedItems),
             queryId,
         }
-        fetch('http://85.119.146.179:8000/web-data', {
+        fetch('http://192.168.0.2:8000/web-data', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -49,7 +47,7 @@ const ProductList = () => {
 
     const onAdd = (product) => {
         const alreadyAdded = addedItems.find(item => item.id === product.id);
-        let newItems = [];
+        let newItems;
 
         if(alreadyAdded) {
             newItems = addedItems.filter(item => item.id !== product.id);
